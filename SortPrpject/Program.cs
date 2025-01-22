@@ -6,7 +6,9 @@ for (int i = 0; i < mas.Length; i++)
     mas[i] = random.Next(1, 1000);
 Stopwatch stopWatch = new Stopwatch();
 stopWatch.Start();
-mas = BubbleSort(mas);
+//mas = BubbleSort(mas);
+//mas = ShakerSort(mas);
+mas = InsertionSort(mas);
 stopWatch.Stop();
 Console.WriteLine("Время работы алгоритма:" + stopWatch.ElapsedMilliseconds.ToString());
 
@@ -51,6 +53,22 @@ int[] ShakerSort(int[] mas)
             }
         }
         if (!swapFlag) break;
+    }
+    return mas;
+}
+//сортировка вставками
+int[] InsertionSort(int[] array)
+{
+    for(var i = 1; i < mas.Length; i++)
+    {
+        var key = mas[i];
+        var j = i;
+        while ((j > 1) && (mas[j-1]>key))
+        {
+            Swap(ref mas[j - 1], ref mas[j]);
+            j--;
+        }
+        mas[j] = key;
     }
     return mas;
 }
