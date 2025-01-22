@@ -1,16 +1,24 @@
 ﻿using System.Diagnostics;
 
-int[] mas = new int[100000];
+int[] mas = new int[10000000];
 Random random = new Random();
 for (int i = 0; i < mas.Length; i++)
     mas[i] = random.Next(1, 1000);
-Stopwatch stopWatch = new Stopwatch();
-stopWatch.Start();
+Stopwatch stopWatch1 = new Stopwatch();
+stopWatch1.Start();
 //mas = BubbleSort(mas);
 //mas = ShakerSort(mas);
-mas = InsertionSort(mas);
-stopWatch.Stop();
-Console.WriteLine("Время работы алгоритма:" + stopWatch.ElapsedMilliseconds.ToString());
+//mas = InsertionSort(mas);
+//mas = StoogeSort(mas, 0, mas.Length - 1);
+mas = ShellSort(mas);
+stopWatch1.Stop();
+//foreach(int i in mas) Console.Write(i+" ");
+Console.WriteLine();
+Console.WriteLine("Время работы алгоритма:" + stopWatch1.ElapsedMilliseconds.ToString());
+//Stopwatch stopWatch2 = new Stopwatch();
+//stopWatch2.Start();
+//mas = PancakeSort(mas);
+//Console.WriteLine("Время работы алгоритма:" + stopWatch2.ElapsedMilliseconds.ToString());
 
 void Swap(ref int a,ref int b)
 {
@@ -69,6 +77,74 @@ int[] InsertionSort(int[] array)
             j--;
         }
         mas[j] = key;
+    }
+    return mas;
+}
+//Реализация сортировки по частям
+int[] StoogeSort(int[] mas,int startIndex,int endIndex)
+{
+    if (mas[startIndex] > mas[endIndex])
+    {
+        Swap(ref mas[startIndex], ref mas[endIndex]);
+    }
+    if (endIndex - startIndex > 1)
+    {
+        var len = (endIndex - startIndex + 1) / 3;
+        StoogeSort(mas, startIndex, endIndex - len);
+        StoogeSort(mas, startIndex+len, endIndex);
+        StoogeSort(mas, startIndex, endIndex - len);
+    }
+    return mas;
+}
+//алгоритм блинной сортировки
+void Flip(int[] mas,int end)
+{
+    for(var start=0;start<end;start++,end--)
+    {
+        var temp = mas[start];
+        mas[start] = mas[end];
+        mas[end] = temp;
+    }
+}
+int IndexOfMax(int[] mas,int n)
+{
+    int result = 0;
+    for (int i = 1; i <=n; i++)
+    {
+        if (mas[i] > mas[result]) result = i;
+    }
+    return result;
+}
+int[] PancakeSort(int[] mas)
+{
+    for (var subarrayLength=mas.Length-1;subarrayLength>=0;subarrayLength--)
+    {
+        var indexOfMax = IndexOfMax(mas, subarrayLength);
+        if(indexOfMax!=subarrayLength)
+        {
+            Flip(mas, indexOfMax);
+            Flip(mas, subarrayLength);
+        }
+    }
+    return mas;
+}
+
+//сортировка Шелла
+int[] ShellSort(int[] mas)
+{
+    var d = mas.Length / 2;
+    while (d >= 1)
+    {
+        for (int i = d; i < mas.Length; i++)
+        {
+            var j = i;
+            while ((j >= d) && (mas[j - d] > mas[j]))
+            {
+                Swap(ref mas[j], ref mas[j - d]);
+                j = j - d;
+            }
+        }
+        d = d / 2;
     }
     return mas;
 }
