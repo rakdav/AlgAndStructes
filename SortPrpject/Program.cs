@@ -1,7 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
 
-int[] mas = new int[100];
+int[] mas = new int[100000];
 Random random = new Random();
 for (int i = 0; i < mas.Length; i++)
 {
@@ -16,9 +17,10 @@ stopWatch1.Start();
 //mas = InsertionSort(mas);
 //mas = StoogeSort(mas, 0, mas.Length - 1);
 //mas = ShellSort(mas);
-mas = MergeSort(mas, 0, mas.Length - 1);
+//mas = MergeSort(mas, 0, mas.Length - 1);
+mas = SelectionSort(mas);
 stopWatch1.Stop();
-foreach(int i in mas) Console.Write(i+" ");
+//foreach(int i in mas) Console.Write(i+" ");
 Console.WriteLine();
 Console.WriteLine("Время работы алгоритма:" + stopWatch1.ElapsedMilliseconds.ToString());
 //Stopwatch stopWatch2 = new Stopwatch();
@@ -207,4 +209,37 @@ int[] MergeSort(int[] mas,int lowIndex,int highIndex)
     }
     return mas;
 }
-
+//сортировка выбором
+int IndexOfMin(int[] array, int n)
+{
+    int result = n;
+    for (var i = n; i < array.Length; ++i)
+    {
+        if (array[i] < array[result])
+        {
+            result = i;
+        }
+    }
+    return result;
+}
+int[] SelectionSort(int[] array)
+{
+    int indx; 
+    for (int i = 0; i < array.Length; i++) 
+    {
+        indx = i; 
+        for (int j = i; j < array.Length; j++) 
+        {
+            if (array[j] < array[indx])
+            {
+                indx = j; 
+            }
+        }
+        if (array[indx] == array[i]) 
+            continue;
+        int temp = array[i]; 
+        array[i] = array[indx];
+        array[indx] = temp;
+    }
+    return array;
+}
