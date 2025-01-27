@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 
-int[] mas = new int[10000000];
+int[] mas = new int[100];
 Random random = new Random();
 for (int i = 0; i < mas.Length; i++)
+{
     mas[i] = random.Next(1, 1000);
+   // Console.Write(mas[i]+" ");
+}
+Console.WriteLine();
 Stopwatch stopWatch1 = new Stopwatch();
 stopWatch1.Start();
 //mas = BubbleSort(mas);
@@ -14,7 +18,7 @@ stopWatch1.Start();
 //mas = ShellSort(mas);
 mas = MergeSort(mas, 0, mas.Length - 1);
 stopWatch1.Stop();
-//foreach(int i in mas) Console.Write(i+" ");
+foreach(int i in mas) Console.Write(i+" ");
 Console.WriteLine();
 Console.WriteLine("Время работы алгоритма:" + stopWatch1.ElapsedMilliseconds.ToString());
 //Stopwatch stopWatch2 = new Stopwatch();
@@ -152,39 +156,44 @@ int[] ShellSort(int[] mas)
 }
 //сортировка слиянием
 //метод слияния массивов
-void Merge(int[] mas,int lowIndex,int middleIndex,int highIndex)
+void Merge(int[] array, int lowIndex, int middleIndex, int highIndex)
 {
     var left = lowIndex;
     var right = middleIndex + 1;
     var tempArray = new int[highIndex - lowIndex + 1];
     var index = 0;
-    while((left<=middleIndex)&&(right<=highIndex))
+
+    while ((left <= middleIndex) && (right <= highIndex))
     {
-        if (mas[left] < mas[right])
+        if (array[left] < array[right])
         {
-            tempArray[index] = mas[left];
+            tempArray[index] = array[left];
             left++;
         }
         else
         {
-            mas[index] = mas[right];
+            tempArray[index] = array[right];
             right++;
         }
+
         index++;
     }
-    for (int i = left; i <=middleIndex; i++)
+
+    for (var i = left; i <= middleIndex; i++)
     {
-        mas[index] = mas[i];
+        tempArray[index] = array[i];
         index++;
     }
-    for (int i = right; i <=highIndex; i++)
+
+    for (var i = right; i <= highIndex; i++)
     {
-        mas[index] = mas[i];
+        tempArray[index] = array[i];
         index++;
     }
-    for (int i = 0; i < mas.Length; i++)
+
+    for (var i = 0; i < tempArray.Length; i++)
     {
-        mas[lowIndex + i] = mas[i];
+        array[lowIndex + i] = tempArray[i];
     }
 }
 int[] MergeSort(int[] mas,int lowIndex,int highIndex)
