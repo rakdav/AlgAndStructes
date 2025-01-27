@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 
 int[] mas = new int[10000000];
 Random random = new Random();
@@ -10,7 +11,8 @@ stopWatch1.Start();
 //mas = ShakerSort(mas);
 //mas = InsertionSort(mas);
 //mas = StoogeSort(mas, 0, mas.Length - 1);
-mas = ShellSort(mas);
+//mas = ShellSort(mas);
+mas = MergeSort(mas, 0, mas.Length - 1);
 stopWatch1.Stop();
 //foreach(int i in mas) Console.Write(i+" ");
 Console.WriteLine();
@@ -148,3 +150,52 @@ int[] ShellSort(int[] mas)
     }
     return mas;
 }
+//сортировка слиянием
+//метод слияния массивов
+void Merge(int[] mas,int lowIndex,int middleIndex,int highIndex)
+{
+    var left = lowIndex;
+    var right = middleIndex + 1;
+    var tempArray = new int[highIndex - lowIndex + 1];
+    var index = 0;
+    while((left<=middleIndex)&&(right<=highIndex))
+    {
+        if (mas[left] < mas[right])
+        {
+            tempArray[index] = mas[left];
+            left++;
+        }
+        else
+        {
+            mas[index] = mas[right];
+            right++;
+        }
+        index++;
+    }
+    for (int i = left; i <=middleIndex; i++)
+    {
+        mas[index] = mas[i];
+        index++;
+    }
+    for (int i = right; i <=highIndex; i++)
+    {
+        mas[index] = mas[i];
+        index++;
+    }
+    for (int i = 0; i < mas.Length; i++)
+    {
+        mas[lowIndex + i] = mas[i];
+    }
+}
+int[] MergeSort(int[] mas,int lowIndex,int highIndex)
+{
+    if (lowIndex < highIndex)
+    {
+        var middleIndex = (lowIndex + highIndex) / 2;
+        MergeSort(mas, lowIndex, middleIndex);
+        MergeSort(mas, middleIndex + 1, highIndex);
+        Merge(mas, lowIndex, middleIndex, highIndex);
+    }
+    return mas;
+}
+
