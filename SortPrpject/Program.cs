@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-int[] mas = new int[100000];
+int[] mas = new int[1000000];
 Random random = new Random();
 for (int i = 0; i < mas.Length; i++)
 {
@@ -18,7 +18,10 @@ stopWatch1.Start();
 //mas = StoogeSort(mas, 0, mas.Length - 1);
 //mas = ShellSort(mas);
 //mas = MergeSort(mas, 0, mas.Length - 1);
-mas = SelectionSort(mas);
+//mas = SelectionSort(mas);
+//mas = QuickSort(mas, 0, mas.Length - 1);
+//mas = GnomeSort(mas);
+mas = TreeSort(mas);
 stopWatch1.Stop();
 //foreach(int i in mas) Console.Write(i+" ");
 Console.WriteLine();
@@ -242,4 +245,92 @@ int[] SelectionSort(int[] array)
         array[indx] = temp;
     }
     return array;
+}
+//быстрая сортировка (сортировка Хоара)
+int Partition(int[] array,int minIndex,int maxIndex)
+{
+    var pivot = minIndex - 1;
+    for (int i = minIndex; i < maxIndex; i++)
+    {
+        if (array[i] < array[maxIndex])
+        {
+            pivot++;
+            Swap(ref array[pivot], ref array[i]);
+        }
+    }
+    pivot++;
+    Swap(ref array[pivot], ref array[maxIndex]);
+    return pivot;
+}
+int[] QuickSort(int[] array,int minIndex,int maxIndex)
+{
+    if (minIndex >= maxIndex) return array;
+    var pivotIndex = Partition(array, minIndex, maxIndex);
+    QuickSort(array, minIndex, pivotIndex - 1);
+    QuickSort(array, pivotIndex + 1, maxIndex);
+    return array;
+}
+
+//Гномья сортировка
+int[] GnomeSort(int[] array)
+{
+    var index = 1;
+    var nextIndex = index + 1;
+    while (index < mas.Length)
+    {
+        if (array[index - 1] < array[index])
+        {
+            index = nextIndex;
+            nextIndex++;
+        }
+        else
+        {
+            Swap(ref array[index - 1], ref array[index]);
+            index--;
+            if (index == 0)
+            {
+                index = nextIndex;
+                nextIndex++;
+            }
+        }
+    }
+    return array;
+}
+//Сортировка бинарным деревом
+int[] TreeSort(int[] array)
+{
+    var treeNode = new TreeNode(array[0]);
+    for (int i = 1; i < array.Length; i++)
+    {
+        treeNode.Insert(new TreeNode(array[i]));
+    }
+    return treeNode.Transform();
+}
+public class TreeNode
+{
+    public int Data { get; set; }
+    public TreeNode Left { get; set; }
+    public TreeNode Right { get; set; }
+    public TreeNode(int data)=>Data = data;
+    public void Insert(TreeNode node)
+    {
+        if (node.Data < Data)
+        {
+            if (Left == null) Left = node;
+            else Left.Insert(node);
+        }
+        else
+        {
+            if (Right == null) Right = node;
+            else Right.Insert(node);
+        }
+    }
+    public int[] Transform(List<int> elements=null)
+    {
+        if (elements == null) elements = new List<int>();
+        if (Left != null) Left.Transform(elements);
+        elements.Add(Data);
+        if (Right != null) Right.Transform(elements);
+        return elements.ToArray();
+    }
 }
