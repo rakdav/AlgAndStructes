@@ -36,7 +36,11 @@ company.Root.Children = new List<TreeNode<Person>>()
 };
 company.Root.Children[2].Children = new List<TreeNode<Person>>()
 {
-
+    new TreeNode<Person>()
+    {
+        Data=new Person(10,"Хомячков сын","Куликов"),
+        Parent=company.Root.Children[2]
+    }
 };
 class TreeNode<T>
 {
