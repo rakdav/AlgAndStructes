@@ -29,6 +29,12 @@ class BinaryTreeNode<T> : TreeNode<T>
         set { Children[1] = value; }
     }
 }
+enum TraverselEnum
+{
+    PREODER,
+    INORDER,
+    POSTORDER
+}
 class BinaryTree<T>
 {
     public BinaryTreeNode<T> Root { get; set; }
@@ -42,5 +48,51 @@ class BinaryTree<T>
             TraversePreOrder(node.Left, result);
             TraversePreOrder(node.Right, result);
         }
+    }
+    private void TraverseInOrder(BinaryTreeNode<T> node,
+        List<BinaryTreeNode<T>> result)
+    {
+        if (node != null)
+        {
+            TraverseInOrder(node.Left, result);
+            result.Add(node);
+            TraverseInOrder(node.Right, result);
+        }
+    }
+    private void TraversePostOrder(BinaryTreeNode<T> node,
+        List<BinaryTreeNode<T>> result)
+    {
+        if (node != null)
+        {
+            TraversePostOrder(node.Left, result);
+            TraversePostOrder(node.Right, result);
+            result.Add(node);
+        }
+    }
+    public List<BinaryTreeNode<T>> Traverse(TraverselEnum mode)
+    {
+        List<BinaryTreeNode<T>> nodes = new List<BinaryTreeNode<T>>();
+        switch(mode)
+        {
+            case TraverselEnum.PREODER:
+                TraversePreOrder(Root, nodes);
+                break;
+            case TraverselEnum.INORDER:
+                TraverseInOrder(Root, nodes);
+                break;
+            case TraverselEnum.POSTORDER:
+                TraversePostOrder(Root, nodes);
+                break;
+        }
+        return nodes;
+    }
+    public int GetHeight()
+    {
+        int height = 0;
+        foreach(BinaryTreeNode<T> node in Traverse(TraverselEnum.PREODER))
+        {
+            height = Math.Max(height, node.GetHeight());
+        }
+        return height;
     }
 }
