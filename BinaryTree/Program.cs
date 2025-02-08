@@ -52,6 +52,7 @@ BinaryTree<QuizItem> GetTree()
            }
        }
     };
+    tree.Count = 3;
     return tree;
 }
 //BinaryTree<QuizItem> tree=
