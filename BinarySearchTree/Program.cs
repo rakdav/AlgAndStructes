@@ -2,7 +2,14 @@
 const int COLUMN_WIDTH = 5;
 void VisualizationTree(BinarySearchTree<int> tree,string caption)
 {
-
+    Console.WriteLine(tree.Count);
+    char[][] console = InitializeVisualization(tree, out int width);
+    VisualizationNode(tree.Root, 0, width / 2, console, width);
+    Console.WriteLine(caption);
+    foreach (char[] row in console)
+    {
+        Console.WriteLine(row);
+    }
 }
 char[][] InitializeVisualization(BinarySearchTree<int> tree,out int width)
 {
@@ -28,6 +35,8 @@ void VisualizationNode(BinaryTreeNode<int> node, int row,int column, char[][] co
         int columnData = (width + 1) / (int)Math.Pow(2, node.GetHeight() + 1);
         VisualizationNode(node.Left, row + 2, column - columnData, console, width);
         VisualizationNode(node.Right, row + 2, column + columnData, console, width);
+        DrawLineLeft(node, row, column,console, columnData);
+        DrawLineRight(node, row, column, console, columnData);
     }
 }
 void DrawLineRight(BinaryTreeNode<int> node,int row,int column, char[][] console,
@@ -46,7 +55,21 @@ void DrawLineRight(BinaryTreeNode<int> node,int row,int column, char[][] console
     }
 }
 
-
+void DrawLineLeft(BinaryTreeNode<int> node, int row, int column, char[][] console,
+    int columnDelta)
+{
+    if (node.Left != null)
+    {
+        int startColumnIndex = COLUMN_WIDTH * (column-columnDelta) + 2;
+        int endColumnIndex = COLUMN_WIDTH * column+ 2;
+        for (int x = startColumnIndex + 1; x < endColumnIndex; x++)
+        {
+            console[row + 1][x] = '-';
+        }
+        console[row + 1][startColumnIndex] = '\u250c';
+        console[row][endColumnIndex] = '+';
+    }
+}
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 BinarySearchTree<int> tree = new BinarySearchTree<int>();
 tree.Root = new BinaryTreeNode<int>() { Data = 100 };
