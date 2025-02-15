@@ -30,7 +30,7 @@ void VisualizationNode(BinaryTreeNode<int> node, int row,int column, char[][] co
         int margin = (COLUMN_WIDTH - chars.Length) / 2;
         for (int i = 0; i < chars.Length; i++)
         {
-            console[row][COLUMN_WIDTH * column + margin] = chars[i];
+            console[row][COLUMN_WIDTH * column +i+ margin] = chars[i];
         }
         int columnData = (width + 1) / (int)Math.Pow(2, node.GetHeight() + 1);
         VisualizationNode(node.Left, row + 2, column - columnData, console, width);
@@ -78,5 +78,6 @@ tree.Root.Left = new BinaryTreeNode<int>()
 tree.Root.Right = new BinaryTreeNode<int>()
 { Data = 150, Parent = tree.Root };
 tree.Count = 3;
+VisualizationTree(tree, "BST после добавления (50,100,150)");
 
 
