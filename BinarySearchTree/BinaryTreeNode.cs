@@ -10,6 +10,7 @@ namespace BinarySearchTree
 {
     public class BinarySearchTree<T>:BinaryTree<T> where T : IComparable 
     {
+        
         public bool Contains(T data)
         {
             BinaryTreeNode<T> node = Root;
@@ -103,6 +104,65 @@ namespace BinarySearchTree
     {
         public BinaryTreeNode<T> Root { get; set; }
         public int Count { get; set; }
+        public List<BinaryTreeNode<T>> Traverse(TraversalEnum mode)
+        {
+            List<BinaryTreeNode<T>> nodes = new List<BinaryTreeNode<T>>();
+            switch (mode)
+            {
+                case TraversalEnum.PREORDER:
+                    TraversalPreOrder(Root, nodes);
+                    break;
+                case TraversalEnum.INORDER:
+                    TraversalInOrder(Root, nodes);
+                    break;
+                case TraversalEnum.POSTORDER:
+                    TraversalPostOrder(Root, nodes);
+                    break;
+            }
+            return nodes;
+        }
+        private void TraversalPreOrder(BinaryTreeNode<T> node, List<BinaryTreeNode<T>> result)
+        {
+            if (node != null)
+            {
+                result.Add(node);
+                TraversalPreOrder(node.Left, result);
+                TraversalPreOrder(node.Right, result);
+            }
+        }
+        private void TraversalInOrder(BinaryTreeNode<T> node, List<BinaryTreeNode<T>> result)
+        {
+            if (node != null)
+            {
+                TraversalInOrder(node.Left, result);
+                result.Add(node);
+                TraversalInOrder(node.Right, result);
+            }
+        }
+        private void TraversalPostOrder(BinaryTreeNode<T> node, List<BinaryTreeNode<T>> result)
+        {
+            if (node != null)
+            {
+                TraversalPostOrder(node.Left, result);
+                TraversalPostOrder(node.Right, result);
+                result.Add(node);
+            }
+        }
+        public int GetHeight()
+        {
+            int height = 0;
+            foreach (BinaryTreeNode<T> node in Traverse(TraversalEnum.PREORDER))
+            {
+                height = Math.Max(height, node.GetHeight());
+            }
+            return height;
+        }
+    }
+    public enum TraversalEnum
+    {
+        PREORDER,
+        INORDER,
+        POSTORDER
     }
     public class BinaryTreeNode<T>:TreeNode<T>
     {
