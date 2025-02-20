@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree", "BinaryTree\Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchTree", "BinarySearchTree\BinarySearchTree.csproj", "{44DDD132-080E-4D13-980D-0F4FC540CB5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVL", "AVL\AVL.csproj", "{86125EA9-596D-4A4F-897E-8EECCBD2674B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedBlackTree", "RedBlackTree\RedBlackTree.csproj", "{72B51BC5-FCFB-4DAA-941A-4F03C1DF56D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,8 +67,19 @@ Global
 		{44DDD132-080E-4D13-980D-0F4FC540CB5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44DDD132-080E-4D13-980D-0F4FC540CB5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44DDD132-080E-4D13-980D-0F4FC540CB5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86125EA9-596D-4A4F-897E-8EECCBD2674B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86125EA9-596D-4A4F-897E-8EECCBD2674B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86125EA9-596D-4A4F-897E-8EECCBD2674B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86125EA9-596D-4A4F-897E-8EECCBD2674B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72B51BC5-FCFB-4DAA-941A-4F03C1DF56D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72B51BC5-FCFB-4DAA-941A-4F03C1DF56D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72B51BC5-FCFB-4DAA-941A-4F03C1DF56D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72B51BC5-FCFB-4DAA-941A-4F03C1DF56D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BDAC52E-9FC9-4353-9FD6-3E56CFAE1759}
 	EndGlobalSection
 EndGlobal

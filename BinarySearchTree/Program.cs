@@ -89,4 +89,4 @@ tree.Add(90);
 tree.Add(110);
 tree.Add(135);
 VisualizeTree(tree, "The BST after adding five nodes (25, 175, 90, 110, 135):");
-Console.WriteLine();
+Console.WriteLine(tree.Contains(110));
