@@ -41,13 +41,13 @@ namespace graphsProject
         {
             Node<T> node = new Node<T> { Data = value };
             Nodes.Add(node);
-            //UpdateIndeces();
+            UpdateIndeces();
             return node;
         }
         public void RemoveNode(Node<T> nodeToRemove)
         {
             Nodes.Remove(nodeToRemove);
-            //UpdateIndeces();
+            UpdateIndeces();
             foreach(Node<T> node in Nodes)
             {
                 RemoveEdge(node, nodeToRemove);
@@ -72,5 +72,29 @@ namespace graphsProject
                 if (_isWeighted) to.Weights.RemoveAt(index);
             }
         }
+        public List<Edge<T>> GetEdges()
+        {
+            List<Edge<T>> edges = new List<Edge<T>>();
+            foreach(Node<T> from in Nodes)
+            {
+                for(int i=0;i<from.Neightbors.Count;i++)
+                {
+                    Edge<T> edge = new Edge<T>()
+                    {
+                        From = from,
+                        To = from.Neightbors[i],
+                        Weight = i < from.Weights.Count ? from.Weights[i] : 0
+                    };
+                    edges.Add(edge);
+                }
+            }
+            return edges;
+        }
+        private void UpdateIndeces()
+        {
+            int i = 0;
+            Nodes.ForEach(n => n.Index = i++);
+        }
+
     }
 }
