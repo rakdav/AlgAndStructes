@@ -37,5 +37,40 @@ namespace graphsProject
                 return null;
             }
         }
+        public Node<T> AddNode(T value)
+        {
+            Node<T> node = new Node<T> { Data = value };
+            Nodes.Add(node);
+            //UpdateIndeces();
+            return node;
+        }
+        public void RemoveNode(Node<T> nodeToRemove)
+        {
+            Nodes.Remove(nodeToRemove);
+            //UpdateIndeces();
+            foreach(Node<T> node in Nodes)
+            {
+                RemoveEdge(node, nodeToRemove);
+            }
+        }
+        public void AddEdge(Node<T> from,Node<T> to,int weight=0)
+        {
+            from.Neightbors.Add(to);
+            if (_isWeighted) from.Weights.Add(weight);
+            if (!_isDirected)
+            {
+                to.Neightbors.Add(from);
+                if (_isWeighted) to.Weights.Add(weight);
+            }
+        }
+        public void RemoveEdge(Node<T> from,Node<T> to)
+        {
+            int index = from.Neightbors.FindIndex(n => n == to);
+            if (index > 0)
+            {
+                from.Neightbors.RemoveAt(index);
+                if (_isWeighted) to.Weights.RemoveAt(index);
+            }
+        }
     }
 }
