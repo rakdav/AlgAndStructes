@@ -130,7 +130,7 @@ namespace graphsProject
                 {
                     isVisited[neightbor.Index] = true;
                     queue.Enqueue(neightbor);
-                }
+                } 
             }
             return result;
         }
