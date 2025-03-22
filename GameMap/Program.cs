@@ -1,4 +1,5 @@
 ﻿using graphsProject;
+using System.Text;
 string[] lines = new string[]
             {
                 "0011100000111110000011111",
@@ -50,4 +51,18 @@ for (int i = 0; i <map.Length; i++)
 
 Node<string> source = graph.Nodes.Find(n => n.Data == $"0-0")!;
 Node<string> target = graph.Nodes.Find(n => n.Data == $"16-24")!;
-
+List<Edge<string>> path = graph.GetShortestPathDijkstra(source, target);
+Console.OutputEncoding=Encoding.UTF8;
+for (int row = 0; row < map.Length; row++)
+{
+    for (int column = 0; column < map[row].Length; column++)
+    {
+        ConsoleColor color = map[row][column] ? ConsoleColor.Green : ConsoleColor.Red;
+        if (path.Any(e => e.From.Data == $"{row}-{column}" || e.To.Data == $"{row}-{column}"))
+            color = ConsoleColor.White;
+        Console.ForegroundColor = color;
+        Console.Write("\u25cf ");
+    }
+    Console.WriteLine();
+}
+Console.ForegroundColor = ConsoleColor.Gray;
