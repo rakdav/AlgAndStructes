@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Priority_Queue;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace graphsProject
 {
     public class Graph<T>
     {
-        #region Implementation
         private bool _isDirected = false;
         private bool _isWeighted = false;
         public List<Node<T>> Nodes { get; set; } = new List<Node<T>>();
@@ -111,11 +111,7 @@ namespace graphsProject
             int i = 0;
             Nodes.ForEach(n => n.Index = i++);
         }
-        #endregion
 
-        #region Minimum Spanning Tree (Kruskal)
-        // The presented code is based on the implementation shown at:
-        // https://www.geeksforgeeks.org/greedy-algorithms-set-2-kruskals-minimum-spanning-tree-mst/
         public List<Edge<T>> MinimumSpanningTreeKruskal()
         {
             List<Edge<T>> edges = GetEdges();
@@ -172,11 +168,7 @@ namespace graphsProject
                 subsets[a.Index].Rank++;
             }
         }
-        #endregion
 
-        #region Minimum Spanning Tree (Prim)
-        // The presented code is based on the implementation shown at:
-        // https://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-minimum-spanning-tree-mst-2/
         public List<Edge<T>> MinimumSpanningTreePrim()
         {
             int[] previous = new int[Nodes.Count];
@@ -234,9 +226,7 @@ namespace graphsProject
 
             return minIndex;
         }
-        #endregion
 
-        #region Shortest Path
         public List<Edge<T>> GetShortestPathDijkstra(Node<T> source, Node<T> target)
         {
             int[] previous = new int[Nodes.Count];
@@ -287,11 +277,7 @@ namespace graphsProject
             }
             return result;
         }
-        #endregion
 
-        #region Coloring
-        // The presented code is based on the implementation shown at:
-        // https://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/
         public int[] Color()
         {
             int[] colors = new int[Nodes.Count];
@@ -328,9 +314,6 @@ namespace graphsProject
 
             return colors;
         }
-        #endregion
-
-        #region Auxiliary
         private void Fill<Q>(Q[] array, Q value)
         {
             for (int i = 0; i < array.Length; i++)
@@ -338,9 +321,7 @@ namespace graphsProject
                 array[i] = value;
             }
         }
-        #endregion
 
-        #region Traversal
         public List<Node<T>> DFS()
         {
             bool[] isExplored = new bool[Nodes.Count];
@@ -367,9 +348,6 @@ namespace graphsProject
         {
             return BFS(Nodes[0]);
         }
-
-        // The presented code is based on the implementation shown at:
-        // https://www.geeksforgeeks.org/breadth-first-traversal-for-a-graph/.
         private List<Node<T>> BFS(Node<T> node)
         {
             bool[] isExplored = new bool[Nodes.Count];
@@ -395,5 +373,5 @@ namespace graphsProject
 
             return result;
         }
-# endre
     }
+}
