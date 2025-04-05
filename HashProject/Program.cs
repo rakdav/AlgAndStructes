@@ -19,6 +19,7 @@ string line = Console.ReadLine()!;
 Console.WriteLine(HashCode(line));
 Console.WriteLine(GetHash(line));
 Console.WriteLine(CreateSHA256(line));
+
 string GetHash(string str)
 {
     MD5 md5 = MD5.Create();

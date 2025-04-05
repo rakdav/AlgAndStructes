@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameMap", "GameMap\GameMap.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashProject", "HashProject\HashProject.csproj", "{03B683E7-0455-4CE1-9635-2BFF23FC1DE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstMongo", "FirstMongo\FirstMongo.csproj", "{A09C3ED1-5A66-414B-A0DF-FE0256599FB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{03B683E7-0455-4CE1-9635-2BFF23FC1DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03B683E7-0455-4CE1-9635-2BFF23FC1DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03B683E7-0455-4CE1-9635-2BFF23FC1DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09C3ED1-5A66-414B-A0DF-FE0256599FB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09C3ED1-5A66-414B-A0DF-FE0256599FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09C3ED1-5A66-414B-A0DF-FE0256599FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09C3ED1-5A66-414B-A0DF-FE0256599FB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
