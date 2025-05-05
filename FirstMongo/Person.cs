@@ -1,5 +1,5 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace FirstMongo
 {
-    public class User
+    class Person
     {
         public ObjectId Id { get; set; }
         public string? Name { get; set; }
-        public DateTime Birthday { get; set; }
-        public Double Money { get; set; }
+        public int Age { get; set; }
+        public Company? Company { get; set; }
+        public List<string>? Languages { get; set; } = new List<string>();
     }
 }
